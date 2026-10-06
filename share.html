@@ -1,62 +1,875 @@
-margin: 50px auto;
-    padding: 20px;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-h1 {
-    font-size: 36px;
-    margin-bottom: 12px;
-}
+  <title>Unlimited Reference — Real Experience. Real Knowledge.</title>
 
-.intro {
-    color: #666;
-    margin-bottom: 35px;
-    line-height: 1.6;
-}
+  <meta
+    name="description"
+    content="Unlimited Reference — discover real experiences, practical knowledge and lessons shared by real people."
+  >
 
-.form-box {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-label {
-    display: block;
-    font-weight: bold;
-    margin-top: 22px;
-    margin-bottom: 8px;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    font-family: inherit;
-}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b0d10;
+      color: #ffffff;
+      line-height: 1.6;
+    }
 
-textarea {
-    min-height: 180px;
-    resize: vertical;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-button {
-    margin-top: 28px;
-    padding: 15px 25px;
-    background: #111;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-}
+    button,
+    input {
+      font: inherit;
+    }
 
-button:disabled {
-    opacity: 0.5;
-}
+    /* =========================
+       NAVBAR
+    ========================= */
 
-.message {
-    margin-top: </option>
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 13, 16, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #24282e;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: #8b5cf6;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 14px;
+      color: #c7cbd1;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .nav-button {
+      background: #ffffff;
+      color: #0b0d10;
+      padding: 10px 17px;
+      border-radius: 9px;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .nav-button:hover {
+      transform: translateY(-1px);
+      background: #e9e9e9;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: #5b21b6;
+      filter: blur(180px);
+      opacity: 0.18;
+      top: -180px;
+      left: 10%;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: #2563eb;
+      filter: blur(180px);
+      opacity: 0.12;
+      bottom: -180px;
+      right: 5%;
+      pointer-events: none;
+    }
+
+    .hero-container {
+      max-width: 1100px;
+      width: 100%;
+      margin: auto;
+      padding: 90px 24px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 7px 14px;
+      border: 1px solid #343942;
+      border-radius: 50px;
+      color: #b7bbc2;
+      font-size: 13px;
+      margin-bottom: 28px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .hero h1 {
+      font-size: clamp(52px, 9vw, 100px);
+      line-height: 0.95;
+      letter-spacing: -5px;
+      margin-bottom: 28px;
+      font-weight: 900;
+    }
+
+    .hero h1 span {
+      color: #8b5cf6;
+    }
+
+    .hero-subtitle {
+      max-width: 700px;
+      margin: 0 auto 38px;
+      color: #aeb4bd;
+      font-size: 19px;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .primary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      color: #0b0d10;
+      padding: 14px 23px;
+      border-radius: 10px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .primary-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .secondary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 23px;
+      border-radius: 10px;
+      border: 1px solid #363b43;
+      color: #ffffff;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .secondary-button:hover {
+      background: #181b20;
+    }
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    .search-section {
+      max-width: 850px;
+      margin: -40px auto 0;
+      padding: 0 24px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .search-box {
+      background: #14171c;
+      border: 1px solid #292e36;
+      border-radius: 15px;
+      padding: 8px;
+      display: flex;
+      gap: 8px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+
+    .search-box input {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      padding: 13px 15px;
+      font-size: 15px;
+    }
+
+    .search-box input::placeholder {
+      color: #777d87;
+    }
+
+    .search-button {
+      background: #8b5cf6;
+      border: none;
+      color: white;
+      padding: 0 22px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .search-button:hover {
+      background: #7c4ee6;
+    }
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    .section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 100px 24px;
+    }
+
+    .section-heading {
+      margin-bottom: 40px;
+    }
+
+    .section-heading h2 {
+      font-size: 38px;
+      letter-spacing: -1.5px;
+      margin-bottom: 10px;
+    }
+
+    .section-heading p {
+      color: #8f96a1;
+      max-width: 650px;
+    }
+
+    /* =========================
+       CATEGORIES
+    ========================= */
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .category {
+      padding: 25px;
+      background: #12151a;
+      border: 1px solid #282d34;
+      border-radius: 14px;
+      transition: 0.25s;
+    }
+
+    .category:hover {
+      transform: translateY(-4px);
+      border-color: #555b66;
+      background: #161a20;
+    }
+
+    .category-icon {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    .category h3 {
+      margin-bottom: 7px;
+      font-size: 18px;
+    }
+
+    .category p {
+      color: #858c97;
+      font-size: 13px;
+    }
+
+    /* =========================
+       HOW IT WORKS
+    ========================= */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .step {
+      padding: 30px;
+      border: 1px solid #292e35;
+      border-radius: 14px;
+      background: #101318;
+    }
+
+    .step-number {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #8b5cf6;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .step h3 {
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      color: #8d949f;
+      font-size: 14px;
+    }
+
+    /* =========================
+       CTA
+    ========================= */
+
+    .cta {
+      max-width: 1100px;
+      margin: 0 auto 100px;
+      padding: 70px 30px;
+      text-align: center;
+      border: 1px solid #302d3d;
+      border-radius: 20px;
+      background: linear-gradient(
+        135deg,
+        #17121f,
+        #101319
+      );
+    }
+
+    .cta h2 {
+      font-size: clamp(32px, 5vw, 52px);
+      margin-bottom: 15px;
+      letter-spacing: -1.5px;
+    }
+
+    .cta p {
+      color: #9299a4;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      border-top: 1px solid #24282e;
+      padding: 35px 24px;
+    }
+
+    .footer-container {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      font-weight: 800;
+    }
+
+    .footer-text {
+      color: #717782;
+      font-size: 13px;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 800px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: 570px;
+      }
+
+      .hero h1 {
+        font-size: 60px;
+        letter-spacing: -3px;
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      .nav-container {
+        padding: 15px 18px;
+      }
+
+      .nav-button {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+
+      .hero-container {
+        padding: 70px 20px;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .search-button {
+        padding: 12px;
+      }
+
+      .categories {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 70px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVBAR
+  ========================= -->
+
+  <nav class="navbar">
+    <div class="nav-container">
+
+      <a href="index.html" class="logo">
+        <span>UR</span> — Unlimited Reference
+      </a>
+
+      <div class="nav-links">
+        <a href="#categories">Categories</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#share">Share</a>
+      </div>
+
+      <a href="share.html" class="nav-button">
+        Share Experience
+      </a>
+
+    </div>
+  </nav>
+
+
+  <!-- =========================
+       HERO
+  ========================= -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-container">
+
+        <div class="hero-badge">
+          A reference built by real people
+        </div>
+
+        <h1>
+          Unlimited<br>
+          <span>Reference.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Real experiences. Real knowledge.
+          Discover what people have learned,
+          what worked, what failed, and what they
+          wish they had known before.
+        </p>
+
+        <div class="hero-buttons">
+
+          <a href="#categories" class="primary-button">
+            Explore Experiences
+          </a>
+
+          <a href="share.html" class="secondary-button">
+            Share Your Experience
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         SEARCH
+    ========================= -->
+
+    <section class="search-section">
+
+      <div class="search-box">
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search experiences, knowledge, lessons..."
+        >
+
+        <button
+          class="search-button"
+          onclick="searchExperiences()"
+        >
+          Search
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CATEGORIES
+    ========================= -->
+
+    <section class="section" id="categories">
+
+      <div class="section-heading">
+
+        <h2>Explore knowledge.</h2>
+
+        <p>
+          Find real experiences from people who have
+          actually been there, done it, learned it or
+          made the mistakes.
+        </p>
+
+      </div>
+
+
+      <div class="categories">
+
+        <a href="#" class="category">
+          <div class="category-icon">🚗</div>
+          <h3>Cars & Mechanics</h3>
+          <p>
+            Repairs, diagnostics, modifications,
+            ownership and practical knowledge.
+          </p>
+        </a>
+
+
+        <a href="#" class="category">
+          <div class="category-icon">💼</div>
+          <h3>Work & Careers</h3>
+          <p>
+            Jobs, workplaces, interviews,
+            career paths and lessons learned.
+          </p>
+        </a>
+
+
+        <a href="#" class="category">
+          <div class="category-icon">🎓</div>
+          <h3>Education</h3>
+          <p>
+            Courses, universities, studying,
+            qualifications and learning experiences.
+          </p>
+        </a>
+
+
+        <a href="#" class="category">
+          <div class="category-icon">🌍</div>
+          <h3>Life</h3>
+          <p>
+            Real-life experiences, decisions,
+            challenges and useful lessons.
+          </p>
+        </a>
+
+
+        <a href="#" class="category">
+          <div class="category-icon">🛠️</div>
+          <h3>Skills</h3>
+          <p>
+            Practical skills, projects,
+            techniques and things worth knowing.
+          </p>
+        </a>
+
+
+        <a href="#" class="category">
+          <div class="category-icon">💻</div>
+          <h3>Technology</h3>
+          <p>
+            Technology, software, tools,
+            products and real-world experiences.
+          </p>
+        </a>
+
+
+        <a href="#" class="category">
+          <div class="category-icon">🏠</div>
+          <h3>Living</h3>
+          <p>
+            Housing, moving, renting and
+            everyday living experiences.
+          </p>
+        </a>
+
+
+        <a href="#" class="category">
+          <div class="category-icon">✨</div>
+          <h3>Other</h3>
+          <p>
+            Anything useful that does not fit
+            another category.
+          </p>
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================= -->
+
+    <section class="section" id="how-it-works">
+
+      <div class="section-heading">
+
+        <h2>How it works.</h2>
+
+        <p>
+          Unlimited Reference is simple.
+          People share what they know,
+          and other people learn from it.
+        </p>
+
+      </div>
+
+
+      <div class="steps">
+
+        <div class="step">
+
+          <div class="step-number">
+            1
+          </div>
+
+          <h3>Share</h3>
+
+          <p>
+            Tell people about something you have
+            experienced, learned or discovered.
+          </p>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-number">
+            2
+          </div>
+
+          <h3>Discover</h3>
+
+          <p>
+            Search and explore experiences from
+            people with real-world knowledge.
+          </p>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-number">
+            3
+          </div>
+
+          <h3>Learn</h3>
+
+          <p>
+            Use other people's experiences as a
+            reference before making your own decision.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         SHARE CTA
+    ========================= -->
+
+    <section class="cta" id="share">
+
+      <h2>
+        Your experience could help someone.
+      </h2>
+
+      <p>
+        You don't need to be an expert.
+        If you've experienced it, learned from it,
+        or made a mistake that someone else could
+        avoid — your knowledge has value.
+      </p>
+
+      <a href="share.html" class="primary-button">
+        Share Your Experience
+      </a>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+
+    <div class="footer-container">
+
+      <div class="footer-logo">
+        UR — Unlimited Reference
+      </div>
+
+      <div class="footer-text">
+        Real Experience. Real Knowledge.
+      </div>
+
+      <div class="footer-text">
+        © 2026 Unlimited Reference
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    function searchExperiences() {
+
+      const input =
+        document.getElementById("searchInput");
+
+      const query =
+        input.value.trim();
+
+      if (!query) {
+
+        alert(
+          "Please enter something to search."
+        );
+
+        return;
+      }
+
+      alert(
+        "Search system coming soon.\n\nYou searched for: " +
+        query
+      );
+
+    }
+
+
+    document
+      .getElementById("searchInput")
+      .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+          searchExperiences();
+        }
+
+      });
+
+  </script>
+
+</body>
+</html>
