@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Explore Knowledge — Unlimited Reference</title>
+
+  <meta
+    name="description"
+    content="Explore real experiences, practical knowledge and useful lessons shared by people around the world."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b0d10;
+      color: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 13, 16, 0.95);
+      border-bottom: 1px solid #242830;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .logo span {
+      color: #8b8f98;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: #b8bdc7;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .hero {
+      max-width: 1000px;
+      margin: auto;
+      padding: 75px 24px 45px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 65px);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      color: #aeb3bc;
+      max-width: 650px;
+      margin: auto;
+      font-size: 18px;
+    }
+
+    .search-box {
+      max-width: 850px;
+      margin: 35px auto 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 17px 18px;
+      border-radius: 12px;
+      border: 1px solid #30343d;
+      background: #15181d;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search-box input:focus {
+      border-color: #666d78;
+    }
+
+    .search-box button {
+      padding: 0 25px;
+      border: 0;
+      border-radius: 12px;
+      background: white;
+      color: black;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 25px 24px 70px;
+    }
+
+    .section-title {
+      margin-bottom: 25px;
+    }
+
+    .section-title h2 {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+
+    .section-title p {
+      color: #8f959f;
+    }
+
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .category {
+      background: #15181d;
+      border: 1px solid #292e36;
+      color: #c5cad2;
+      padding: 10px 15px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .category:hover,
+    .category.active {
+      background: white;
+      color: black;
+      border-color: white;
+    }
+
+    .articles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: #12151a;
+      border: 1px solid #292e36;
+      border-radius: 16px;
+      padding: 24px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #555c67;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 12px;
+      color: #aeb4be;
+      background: #20242b;
+      padding: 5px 9px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #999fa9;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .read {
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .no-results {
+      display: none;
+      padding: 40px;
+      text-align: center;
+      color: #999fa9;
+      border: 1px dashed #333944;
+      border-radius: 15px;
+    }
+
+    footer {
+      border-top: 1px solid #242830;
+      padding: 30px 24px;
+      text-align: center;
+      color: #777d87;
+      font-size: 14px;
+    }
+
+    @media (max-width: 850px) {
+      .articles {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-inner {
+        padding: 15px;
+      }
+
+      .nav-links {
+        gap: 10px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding: 55px 18px 35px;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .search-box button {
+        padding: 14px;
+      }
+
+      .section {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .articles {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        Unlimited <span>Reference</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="explore.html">Explore</a>
+        <a href="share.html">Share</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>Explore Knowledge.</h1>
+
+    <p>
+      Discover real experiences, practical knowledge and useful lessons
+      from people around the world.
+    </p>
+
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search knowledge, experiences or topics..."
+      >
+
+      <button onclick="searchArticles()">Search</button>
+    </div>
+  </header>
+
+  <main class="section">
+
+    <div class="section-title">
+      <h2>Explore by category</h2>
+      <p>Find knowledge across different areas of everyday life.</p>
+    </div>
+
+    <div class="categories">
+      <button class="category active" onclick="filterCategory('all', this)">
+        All
+      </button>
+
+      <button class="category" onclick="filterCategory('Career', this)">
+        Work & Career
+      </button>
+
+      <button class="category" onclick="filterCategory('Education', this)">
+        Education
+      </button>
+
+      <button class="category" onclick="filterCategory('Money', this)">
+        Money & Finance
+      </button>
+
+      <button class="category" onclick="filterCategory('Technology', this)">
+        Technology
+      </button>
+
+      <button class="category" onclick="filterCategory('Travel', this)">
+        Travel
+      </button>
+
+      <button class="category" onclick="filterCategory('Cars', this)">
+        Cars & Transport
+      </button>
+
+      <button class="category" onclick="filterCategory('Food', this)">
+        Food & Cooking
+      </button>
+
+      <button class="category" onclick="filterCategory('Fitness', this)">
+        Health & Fitness
+      </button>
+
+      <button class="category" onclick="filterCategory('Life', this)">
+        Life Lessons
+      </button>
+    </div>
+
+    <div class="articles" id="articles">
+
+      <article class="card" data-category="Career">
+        <span class="tag">Work & Career</span>
+
+        <h3>
+          What I learned from starting my first job
+        </h3>
+
+        <p>
+          Practical lessons about adapting to a new workplace,
+          learning quickly and dealing with pressure.
+        </p>
+
+        <a href="#" class="read">Read experience →</a>
+      </article>
+
+
+      <article class="card" data-category="Education">
+        <span class="tag">Education</span>
+
+        <h3>
+          How I learned a new skill from zero
+        </h3>
+
+        <p>
+          A real experience about learning independently,
+          making mistakes and improving over time.
+        </p>
+
+        <a href="#" class="read">Read experience →</a>
+      </article>
+
+
+      <article class="card" data-category="Money">
+        <span class="tag">Money & Finance</span>
+
+        <h3>
+          Lessons I learned about managing money
+        </h3>
+
+        <p>
+          Simple practical lessons about budgeting,
+          spending and making better financial decisions.
+        </p>
+
+        <a href="#" class="read">Read experience →</a>
+      </article>
+
+
+      <article class="card" data-category="Technology">
+        <span class="tag">Technology</span>
+
+        <h3>
+          Learning technology without a technical background
+        </h3>
+
+        <p>
+          What helped me understand new technology
+          when I started with very little knowledge.
+        </p>
+
+        <a href="#" class="read">Read experience →</a>
+      </article>
+
+
+      <article class="card" data-category="Travel">
+        <span class="tag">Travel</span>
+
+        <h3>
+          Things I wish I knew before travelling
+        </h3>
+
+        <p>
+          Practical lessons that can make travelling
+          easier, cheaper and less stressful.
+        </p>
+
+        <a href="#" class="read">Read experience →</a>
+      </article>
+
+
+      <article class="card" data-category="Cars">
+        <span class="tag">Cars & Transport</span>
+
+        <h3>
+          What years of working with cars taught me
+        </h3>
+
+        <p>
+          Practical lessons from diagnosing problems,
+          repairing vehicles and dealing with customers.
+        </p>
+
+        <a href="#" class="read">Read experience →</a>
+      </article>
+
+
+      <article class="card" data-category="Food">
+        <span class="tag">Food & Cooking</span>
+
+        <h3>
+          What I learned from cooking every day
+        </h3>
+
+        <p>
+          Useful cooking lessons, mistakes and techniques
+          learned through everyday experience.
+        </p>
+
+        <a href="#" class="read">Read experience →</a>
+      </article>
+
+
+      <article class="card" data-category="Fitness">
+        <span class="tag">Health & Fitness</span>
+
+        <h3>
+          What helped me stay consistent with training
+        </h3>
+
+        <p>
+          Practical lessons about building habits,
+          consistency and improving physical performance.
+        </p>
+
+        <a href="#" class="read">Read experience →</a>
+      </article>
+
+
+      <article class="card" data-category="Life">
+        <span class="tag">Life Lessons</span>
+
+        <h3>
+          A life lesson I learned the hard way
+        </h3>
+
+        <p>
+          A personal experience that changed the way
+          I make decisions and deal with problems.
+        </p>
+
+        <a href="#" class="read">Read experience →</a>
+      </article>
+
+    </div>
+
+    <div class="no-results" id="noResults">
+      No results found. Try another search.
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 Unlimited Reference — Real Experience. Real Knowledge.
+  </footer>
+
+
+  <script>
+
+    function filterCategory(category, button) {
+
+      const cards = document.querySelectorAll(".card");
+
+      const buttons = document.querySelectorAll(".category");
+
+      buttons.forEach(btn => {
+        btn.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      let visible = 0;
+
+      cards.forEach(card => {
+
+        if (
+          category === "all" ||
+          card.dataset.category === category
+        ) {
+          card.style.display = "block";
+          visible++;
+        } else {
+          card.style.display = "none";
+        }
+
+      });
+
+      document.getElementById("noResults").style.display =
+        visible === 0 ? "block" : "none";
+    }
+
+
+    function searchArticles() {
+
+      const search =
+        document
+          .getElementById("searchInput")
+          .value
+          .toLowerCase()
+          .trim();
+
+      const cards = document.querySelectorAll(".card");
+
+      let visible = 0;
+
+      cards.forEach(card => {
+
+        const text =
+          card.innerText.toLowerCase();
+
+        if (text.includes(search)) {
+
+          card.style.display = "block";
+          visible++;
+
+        } else {
+
+          card.style.display = "none";
+
+        }
+
+      });
+
+      document.getElementById("noResults").style.display =
+        visible === 0 ? "block" : "none";
+    }
+
+
+    document
+      .getElementById("searchInput")
+      .addEventListener("input", searchArticles);
+
+  </script>
+
+</body>
+</html>
