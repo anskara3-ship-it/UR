@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Share Your Experience - Unlimited Reference</title>
 
-<style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<style>
 * {
     box-sizing: border-box;
     margin: 0;
@@ -66,8 +65,8 @@ h1 {
 label {
     display: block;
     font-weight: bold;
-    margin-bottom: 8px;
     margin-top: 22px;
+    margin-bottom: 8px;
 }
 
 input,
@@ -97,8 +96,25 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    opacity: 0.85;
+button:disabled {
+    opacity: 0.5;
+}
+
+.message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    display: none;
+}
+
+.success {
+    background: #e8f5e9;
+    color: #1b5e20;
+}
+
+.error {
+    background: #ffebee;
+    color: #b71c1c;
 }
 
 .back {
@@ -107,35 +123,21 @@ button:hover {
     color: #555;
     text-decoration: none;
 }
-
 </style>
 
 </head>
 
-
 <body>
 
-
 <header>
-
 <div class="header-inner">
-
-<div class="logo">
-Unlimited Reference
+<div class="logo">Unlimited Reference</div>
 </div>
-
-</div>
-
 </header>
-
 
 <div class="container">
 
-
-<h1>
-Share Your Experience
-</h1>
-
+<h1>Share Your Experience</h1>
 
 <p class="intro">
 Your experience could help someone else.
@@ -143,16 +145,11 @@ Share what you have learned, what worked,
 what didn't, and what you wish you knew earlier.
 </p>
 
-
 <div class="form-box">
 
+<form id="experienceForm">
 
-<form>
-
-
-<label for="title">
-Experience Title
-</label>
+<label>Experience Title</label>
 
 <input
 type="text"
@@ -161,96 +158,8 @@ placeholder="Example: What I learned working as a mechanic"
 required
 >
 
-
-<label for="category">
-Category
-</label>
+<label>Category</label>
 
 <select id="category" required>
 
-<option value="">
-Choose a category
-</option>
-
-<option>
-Cars & Mechanics
-</option>
-
-<option>
-Work & Careers
-</option>
-
-<option>
-Education
-</option>
-
-<option>
-Skills & Trades
-</option>
-
-<option>
-Life Experience
-</option>
-
-<option>
-Ideas & Knowledge
-</option>
-
-</select>
-
-
-<label for="experience">
-Your Experience
-</label>
-
-<textarea
-id="experience"
-placeholder="Tell us about your experience..."
-required
-></textarea>
-
-
-<label for="lesson">
-What did you learn?
-</label>
-
-<textarea
-id="lesson"
-placeholder="What would you recommend to someone else?"
-required
-></textarea>
-
-
-<label for="tags">
-Tags
-</label>
-
-<input
-type="text"
-id="tags"
-placeholder="Example: mechanic, cars, diagnosis"
->
-
-
-<button type="submit">
-Submit Experience
-</button>
-
-
-</form>
-
-
-<a class="back" href="index.html">
-← Back to Unlimited Reference
-</a>
-
-
-</div>
-
-
-</div>
-
-
-</body>
-
-</html>
+<option value="">Choose a category</option>
