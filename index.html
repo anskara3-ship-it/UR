@@ -334,10 +334,81 @@ footer {
 }
 
 </style>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
+<script>
 
+const SUPABASE_URL = "ضع Project URL هنا";
+
+const SUPABASE_KEY = "ضع Publishable Key هنا";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+const form = document.querySelector("form");
+
+
+form.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const title =
+        document.getElementById("title").value.trim();
+
+    const category =
+        document.getElementById("category").value;
+
+    const experience =
+        document.getElementById("experience").value.trim();
+
+    const lesson =
+        document.getElementById("lesson").value.trim();
+
+    const tags =
+        document.getElementById("tags").value.trim();
+
+
+    const { error } =
+        await supabaseClient
+        .from("experiences")
+        .insert([
+            {
+                title: title,
+                category: category,
+                experience: experience,
+                lesson: lesson,
+                tags: tags
+            }
+        ]);
+
+
+    if (error) {
+
+        console.error(error);
+
+        alert(
+            "Your experience could not be submitted."
+        );
+
+        return;
+    }
+
+
+    alert(
+        "Your experience has been submitted successfully!"
+    );
+
+
+    form.reset();
+
+});
+
+</script>
 <body>
 
 
