@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Account — Unlimited Reference</title>
+
+  <meta
+    name="description"
+    content="Create or access your Unlimited Reference account."
+  >
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b0f14;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 460px;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .logo h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .logo p {
+      color: #9ca3af;
+    }
+
+    .card {
+      background: #151b23;
+      border: 1px solid #27313d;
+      border-radius: 18px;
+      padding: 30px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #354150;
+      background: transparent;
+      color: #aaa;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .tab.active {
+      background: #ffffff;
+      color: #111827;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      margin-top: 16px;
+      color: #d1d5db;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid #354150;
+      background: #0f141b;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #ffffff;
+    }
+
+    .main-button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: white;
+      color: #111827;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .main-button:hover {
+      opacity: 0.9;
+    }
+
+    .message {
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 10px;
+      display: none;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .success {
+      display: block;
+      background: #12351f;
+      color: #9ff0b5;
+    }
+
+    .error {
+      display: block;
+      background: #3a1717;
+      color: #ffb4b4;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #9ca3af;
+      text-decoration: none;
+    }
+
+    .back:hover {
+      color: white;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="logo">
+      <h1>Unlimited Reference</h1>
+      <p>Share knowledge. Learn from experience.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="tabs">
+        <button id="loginTab" class="tab active" onclick="showLogin()">
+          Login
+        </button>
+
+        <button id="signupTab" class="tab" onclick="showSignup()">
+          Create Account
+        </button>
+      </div>
+
+      <!-- LOGIN -->
+
+      <div id="loginForm">
+
+        <label for="loginEmail">Email</label>
+
+        <input
+          id="loginEmail"
+          type="email"
+          placeholder="you@example.com"
+        >
+
+        <label for="loginPassword">Password</label>
+
+        <input
+          id="loginPassword"
+          type="password"
+          placeholder="Your password"
+        >
+
+        <button class="main-button" onclick="login()">
+          Login
+        </button>
+
+      </div>
+
+      <!-- SIGN UP -->
+
+      <div id="signupForm" class="hidden">
+
+        <label for="username">Username</label>
+
+        <input
+          id="username"
+          type="text"
+          placeholder="Choose a username"
+        >
+
+        <label for="displayName">Display name</label>
+
+        <input
+          id="displayName"
+          type="text"
+          placeholder="Your name"
+        >
+
+        <label for="signupEmail">Email</label>
+
+        <input
+          id="signupEmail"
+          type="email"
+          placeholder="you@example.com"
+        >
+
+        <label for="signupPassword">Password</label>
+
+        <input
+          id="signupPassword"
+          type="password"
+          placeholder="At least 6 characters"
+        >
+
+        <button class="main-button" onclick="signup()">
+          Create Account
+        </button>
+
+      </div>
+
+      <div id="message" class="message"></div>
+
+      <a href="index.html" class="back">
+        ← Back to Unlimited Reference
+      </a>
+
+    </div>
+
+  </div>
+
+<script>
+
+  const SUPABASE_URL =
+    "https://pczfoiywhkurnmxymmrn.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_MIX_cNQPgIxDjMUlJ3wJyg_qyJJi8UQ";
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  function showMessage(text, type) {
+
+    const message =
+      document.getElementById("message");
+
+    message.textContent = text;
+
+    message.className =
+      "message " + type;
+  }
+
+
+  function showLogin() {
+
+    document
+      .getElementById("loginForm")
+      .classList.remove("hidden");
+
+    document
+      .getElementById("signupForm")
+      .classList.add("hidden");
+
+    document
+      .getElementById("loginTab")
+      .classList.add("active");
+
+    document
+      .getElementById("signupTab")
+      .classList.remove("active");
+
+    document
+      .getElementById("message")
+      .className = "message";
+  }
+
+
+  function showSignup() {
+
+    document
+      .getElementById("signupForm")
+      .classList.remove("hidden");
+
+    document
+      .getElementById("loginForm")
+      .classList.add("hidden");
+
+    document
+      .getElementById("signupTab")
+      .classList.add("active");
+
+    document
+      .getElementById("loginTab")
+      .classList.remove("active");
+
+    document
+      .getElementById("message")
+      .className = "message";
+  }
+
+
+  async function signup() {
+
+    const username =
+      document
+        .getElementById("username")
+        .value
+        .trim();
+
+    const displayName =
+      document
+        .getElementById("displayName")
+        .value
+        .trim();
+
+    const email =
+      document
+        .getElementById("signupEmail")
+        .value
+        .trim();
+
+    const password =
+      document
+        .getElementById("signupPassword")
+        .value;
+
+
+    if (!username || !email || !password) {
+
+      showMessage(
+        "Please complete username, email and password.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    if (password.length < 6) {
+
+      showMessage(
+        "Password must be at least 6 characters.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    showMessage(
+      "Creating your account...",
+      "success"
+    );
+
+
+    const { data, error } =
+      await supabaseClient.auth.signUp({
+
+        email: email,
+
+        password: password,
+
+        options: {
+
+          data: {
+            username: username,
+            display_name: displayName
+          }
+
+        }
+
+      });
+
+
+    if (error) {
+
+      showMessage(
+        error.message,
+        "error"
+      );
+
+      return;
+    }
+
+
+    if (data.user) {
+
+      showMessage(
+        "Account created successfully. Check your email if confirmation is required.",
+        "success"
+      );
+
+    }
+
+  }
+
+
+  async function login() {
+
+    const email =
+      document
+        .getElementById("loginEmail")
+        .value
+        .trim();
+
+    const password =
+      document
+        .getElementById("loginPassword")
+        .value;
+
+
+    if (!email || !password) {
+
+      showMessage(
+        "Please enter your email and password.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    showMessage(
+      "Logging in...",
+      "success"
+    );
+
+
+    const { data, error } =
+      await supabaseClient.auth.signInWithPassword({
+
+        email: email,
+
+        password: password
+
+      });
+
+
+    if (error) {
+
+      showMessage(
+        error.message,
+        "error"
+      );
+
+      return;
+    }
+
+
+    showMessage(
+      "Login successful!",
+      "success"
+    );
+
+
+    setTimeout(() => {
+
+      window.location.href =
+        "index.html";
+
+    }, 1000);
+
+  }
+
+</script>
+
+</body>
+</html>
